@@ -1,0 +1,798 @@
+/* ============ BASE (todo x1.25) ============ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ============ FONDO GLOBAL FIJO ============ */
+.start-page,
+.game-page {
+  background-image: url("https://external-preview.redd.it/Ga24Es10Ast8ng42qrU-odZUfHMR6d8Ceofmbwy5rWw.jpg?auto=webp&s=617176bbdf15f717b2a77e448a3cdcb3a944a23c");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.start-page::before,
+.game-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: -1;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  text-align: center;
+  padding-top: 50px; 
+}
+
+button {
+  padding: 12.5px 25px; 
+  font-size: 20px; 
+  cursor: pointer;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ============ PÁGINA DE INICIO ============ */
+.start-page {
+  padding-top: 25px; 
+}
+
+.start-container {
+  max-width: 1125px; 
+  margin: 0 auto;
+  background: white;
+  border-radius: 25px; 
+  padding: 50px; 
+  box-shadow: 0 12.5px 37.5px rgba(0, 0, 0, 0.1); 
+}
+
+.start-container h1 {
+  color: #2c2c2c;
+  margin-bottom: 37.5px; 
+  font-size: 3.125em; 
+}
+
+/* Animación de intro */
+.intro-animation {
+  margin: 25px 0; 
+}
+
+#intro-sprite {
+  width: 200px; 
+  height: 200px; 
+  image-rendering: pixelated;
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); } 
+}
+
+/* Input de nombre */
+.player-input {
+  margin: 37.5px 0; 
+}
+
+.player-input label {
+  display: block;
+  margin-bottom: 12.5px; 
+  font-weight: bold;
+  color: #555;
+  font-size: 1.375em; 
+}
+
+.player-input input {
+  padding: 15px 25px; 
+  font-size: 20px; 
+  border: 2.5px solid #ddd; 
+  border-radius: 12.5px; 
+  width: 375px; 
+  max-width: 100%;
+  transition: border-color 0.3s;
+}
+
+.player-input input:focus {
+  outline: none;
+  border-color: #ffcc00;
+}
+
+/* Rankings en la página de inicio */
+.rankings-display {
+  gap: 37.5px; 
+}
+
+.ranking-column {
+  background: #0b0b0b;
+  border: 2.5px solid #ffcc00; 
+  border-radius: 10px; 
+  padding: 25px; 
+  position: relative;
+  margin: 12.5px; 
+  box-shadow: 0 0 0 5px #222; 
+}
+
+.ranking-column::before {
+  content: "";
+  position: absolute;
+  inset: 7.5px; 
+  border: 2.5px solid #333; 
+  pointer-events: none;
+}
+
+.ranking-column h3 {
+  font-family: 'Press Start 2P', monospace;
+  color: #ffcc00;
+  font-size: 1.125rem; 
+  margin-bottom: 25px; 
+  text-shadow: 2.5px 2.5px 0 #000; 
+}
+
+.ranking-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: 'Press Start 2P', monospace;
+  color: #eaeaea;
+  font-size: 0.8125rem; 
+}
+
+.ranking-column li {
+  display: flex;
+  justify-content: space-between;
+  padding: 12.5px 10px; 
+  margin-bottom: 7.5px; 
+  background: #111;
+  border-left: 5px solid #00eaff; 
+  text-shadow: 1.25px 1.25px 0 #000; 
+}
+
+.ranking-column li:nth-child(odd) {
+  border-left-color: #ff4fd8;
+}
+
+.ranking-column li:first-child {
+  background: #1a1a1a;
+  border-left-color: #ffcc00;
+  color: #ffcc00;
+}
+
+.ranking-column::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.03),
+    rgba(255,255,255,0.03) 1.25px, 
+    transparent 1.25px,
+    transparent 3.75px 
+  );
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Opciones avanzadas */
+.advanced-options {
+  background: #f0f0f0;
+  border-radius: 12.5px; 
+  padding: 25px; 
+  margin: 25px 0; 
+  text-align: left;
+}
+
+.advanced-options summary {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.375em; 
+  color: #333;
+  padding: 12.5px; 
+  user-select: none;
+}
+
+.advanced-options summary:hover {
+  color: #ffcc00;
+}
+
+.option-group {
+  margin: 18.75px 0; 
+  display: flex;
+  align-items: center;
+  gap: 12.5px; 
+}
+
+.option-group label {
+  font-weight: 500;
+  color: #555;
+  min-width: 275px; 
+}
+
+.option-group input[type="number"],
+.option-group select {
+  padding: 10px 15px; 
+  border: 2.5px solid #ddd; 
+  border-radius: 6.25px; 
+  font-size: 17.5px; 
+  flex: 1;
+  max-width: 187.5px; 
+}
+
+.checkbox-group {
+  flex-direction: row;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 25px; 
+  height: 25px; 
+  cursor: pointer;
+}
+
+.checkbox-group label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12.5px; 
+  min-width: auto;
+}
+
+/* Botón de inicio */
+.start-btn {
+  padding: 17.5px 50px; 
+  font-size: 22.5px; 
+  font-weight: bold;
+  border-radius: 37.5px; 
+  border: none;
+  background: #ffcc00;
+  color: #2c2c2c;
+  cursor: pointer;
+  box-shadow: 0 7.5px 0 #caa200; 
+  transition: all 0.15s ease;
+  margin-top: 25px; 
+}
+
+.start-btn:hover {
+  transform: translateY(-2.5px); 
+  box-shadow: 0 10px 0 #caa200; 
+}
+
+.start-btn:active {
+  transform: translateY(5px); 
+  box-shadow: 0 2.5px 0 #caa200; 
+}
+
+/* ============ PÁGINA DEL JUEGO ============ */
+.game-page {
+  background-color: #f2f2f2;
+}
+
+.game-header {
+  background: white;
+  border-radius: 18.75px; 
+  padding: 25px 37.5px; 
+  margin: 0 auto 25px; 
+  max-width: 1125px; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 6.25px 18.75px rgba(0, 0, 0, 0.1); 
+}
+
+.game-header h1 {
+  color: #2c2c2c;
+  font-size: 2.25em; 
+  margin: 0;
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  gap: 25px; 
+}
+
+#player-name-display {
+  font-weight: bold;
+  color: #ffcc00;
+  font-size: 22.5px; 
+  font-family: 'Press Start 2P', monospace;
+  text-shadow: 2.5px 2.5px 0 #000; 
+}
+
+.exit-btn {
+  padding: 12.5px 25px; 
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 12.5px; 
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.exit-btn:hover {
+  background: #ff5252;
+  transform: translateY(-2.5px);
+}
+
+/* Contenedor del juego */
+#game-ui {
+  max-width: 1125px; 
+  margin: 0 auto;
+  background: white;
+  border-radius: 25px; 
+  padding: 50px; 
+  box-shadow: 0 12.5px 37.5px rgba(0, 0, 0, 0.1); 
+}
+
+#pokemon-container {
+  margin-bottom: 25px; 
+}
+
+.sprite-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+#pokemon-sprite {
+  width: 200px; 
+  height: 200px; 
+  image-rendering: pixelated;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.25s ease-out;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.25s ease-in;
+}
+
+.shiny-badge {
+  position: absolute;
+  top: -18.75px; 
+  right: -18.75px; 
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #333;
+  padding: 6.25px 18.75px; 
+  border-radius: 25px; 
+  font-weight: bold;
+  font-size: 1.125em;
+  box-shadow: 0 3.75px 12.5px rgba(255, 215, 0, 0.5); 
+  animation: sparkle 1s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.1) rotate(5deg); }
+}
+
+#pokemon-name {
+  font-size: 25px; 
+  font-weight: bold;
+  margin-top: 12.5px; 
+}
+
+/* Botones de acción */
+#action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 18.75px; 
+  margin: 25px 0; 
+}
+
+#skip-btn {
+  background-color: rgb(115, 202, 115);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12.5px 25px; 
+  font-weight: bold;
+}
+
+#skip-btn:hover:not(:disabled) {
+  background-color: rgb(95, 182, 95);
+  transform: translateY(-2.5px); 
+}
+
+#skip-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+#mega-btn {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    120deg,
+    #ff004c,
+    #ff9f00,
+    #fff700,
+    #00ff9d,
+    #00c3ff,
+    #8f00ff,
+    #ff004c
+  );
+  background-size: 300% 300%;
+  color: white;
+  border: none;
+  border-radius: 10px; 
+  padding: 12.5px 25px; 
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+#mega-btn:not(:disabled) {
+  animation: mega-rainbow 5s linear infinite;
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.6), 
+    0 0 25px rgba(255, 0, 255, 0.5); 
+}
+
+@keyframes mega-rainbow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+#mega-btn:not(:disabled)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.45),
+    transparent
+  );
+  animation: mega-glint 5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes mega-glint {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(120%); }
+}
+
+#mega-btn:hover:not(:disabled) {
+  transform: translateY(-2.5px); 
+}
+
+#mega-btn:disabled {
+  background: #ccc;
+  box-shadow: none;
+  animation: none;
+  cursor: not-allowed;
+}
+
+/* Selector de formas */
+#form-selector {
+  text-align: center;
+  margin: 25px 0; 
+  padding: 25px; 
+  background: #f8f9fa;
+  border-radius: 12.5px; 
+}
+
+#form-selector p {
+  font-weight: bold;
+  margin-bottom: 18.75px; 
+  color: #333;
+}
+
+#form-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12.5px; 
+  justify-content: center;
+}
+
+.form-btn {
+  padding: 12.5px 25px; 
+  background: #ffcc00;
+  color: #2c2c2c;
+  border: none;
+  border-radius: 10px; 
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.form-btn:hover {
+  background: #e6b800;
+  transform: translateY(-2.5px); 
+}
+
+/* Botones de stats */
+#stats-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12.5px; 
+  margin-top: 25px; 
+  flex-wrap: wrap;
+}
+
+.stat-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-btn {
+  position: relative;
+  width: 137.5px; 
+  height: 62.5px; 
+  font-weight: bold;
+  cursor: pointer;
+  margin: 6.25px; 
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 12.5px; 
+  transition: all 0.3s;
+}
+
+.stat-btn:hover:not(:disabled) {
+  transform: translateY(-2.5px); 
+  box-shadow: 0 6.25px 18.75px rgba(102, 126, 234, 0.3); 
+}
+
+.stat-btn:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+  color: #555;
+}
+
+/* Chip del Pokémon */
+.pokemon-chip {
+  position: absolute;
+  top: -12.5px; 
+  right: -12.5px; 
+  width: 50px; 
+  height: 50px; 
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.25s ease;
+  pointer-events: none;
+  box-shadow: 0 2.5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.pokemon-chip img {
+  width: 50px; 
+  height: 50px; 
+  image-rendering: pixelated;
+}
+
+.pokemon-chip.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.stat-result {
+  width: 91%;
+  margin-top: 0px;
+  margin-bottom: 12.5px; 
+  padding: 12.5px 0; 
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.375rem; 
+  background: #222;
+  color: white;
+  border-radius: 10px; 
+  opacity: 0;
+  transform: translateY(-10px); 
+  transition: all 0.3s ease;
+}
+
+.stat-result.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============ RESULTADOS ============ */
+#result-container {
+  margin: 37.5px auto; 
+  max-width: 750px; 
+  background-color: white;
+  padding: 37.5px; 
+  border-radius: 12.5px; 
+  box-shadow: 0 12.5px 37.5px rgba(0, 0, 0, 0.1);
+}
+
+#result-container h2 {
+  color: #333;
+  margin-bottom: 25px; 
+}
+
+#result-stats {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  margin: 25px 0; 
+}
+
+#result-stats li {
+  padding: 15px; 
+  margin: 10px 0; 
+  background: #f8f9fa;
+  border-radius: 10px; 
+  font-weight: 500;
+}
+
+#total-score {
+  color: #667eea;
+  font-size: 2.5em; 
+  margin: 25px 0; 
+}
+
+.result-actions {
+  display: flex;
+  gap: 12.5px; 
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 25px; 
+}
+
+.result-actions button {
+  padding: 15px 31.25px; 
+  font-size: 1.25em; 
+  font-weight: bold;
+  border: none;
+  border-radius: 12.5px; 
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+#save-score-btn {
+  background: rgb(115, 202, 115);
+  color: white;
+}
+
+#save-score-btn:hover:not(:disabled) {
+  background: rgb(95, 182, 95);
+  transform: translateY(-2.5px); 
+}
+
+#save-score-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+#restart-btn {
+  padding: 12.5px 31.25px; 
+  font-size: 20px; 
+  font-weight: bold;
+  border-radius: 31.25px; 
+  border: none;
+  background: #4caf50;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 6.25px 0 #388e3c;
+  transition: all 0.15s ease;
+}
+
+#restart-btn:hover {
+  transform: translateY(-2.5px); 
+  box-shadow: 0 8.75px 0 #388e3c; 
+}
+
+#restart-btn:active {
+  transform: translateY(3.75px); 
+  box-shadow: 0 2.5px 0 #388e3c; 
+}
+
+#home-btn {
+  background: #ff6b6b;
+  color: white;
+}
+
+#home-btn:hover {
+  background: #ff5252;
+  transform: translateY(-2.5px);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  body {
+    padding-top: 25px; 
+  }
+
+  .start-container {
+    padding: 25px;
+    margin: 12.5px; 
+  }
+
+  .rankings-display {
+    grid-template-columns: 1fr;
+  }
+
+  .game-header {
+    flex-direction: column;
+    gap: 18.75px; 
+    margin: 12.5px; 
+  }
+
+  #game-ui {
+    margin: 12.5px; 
+    padding: 25px; 
+  }
+
+  #stats-buttons {
+    gap: 6.25px; 
+  }
+
+  .stat-btn {
+    width: 125px; 
+    height: 56.25px; 
+    font-size: 1.125em; 
+  }
+
+  .option-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .option-group label {
+    min-width: auto;
+  }
+
+  .result-actions {
+    flex-direction: column;
+  }
+
+  .result-actions button {
+    width: 100%;
+  }
+}
+
+/* ===== BONUS SHINY (+X) ===== */
+.stat-bonus {
+  position: absolute;
+  top: -35px; 
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Courier New', monospace;
+  font-size: 22.5px; 
+  font-weight: bold;
+  color: #ffd700;
+  text-shadow:
+    2.5px 2.5px 0 #000, 
+    -1.25px -1.25px 0 #000, 
+    1.25px -1.25px 0 #000,
+    -1.25px 1.25px 0 #000;
+  pointer-events: none;
+  opacity: 0;
+  animation: bonus-pop 1s ease-out forwards;
+}
+
+@keyframes bonus-pop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 12.5px) scale(0.6); 
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1.2);
+  }
+  60% {
+    opacity: 1;
+    transform: translate(-50%, -22.5px) scale(1); 
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -37.5px) scale(0.9); 
+  }
+}

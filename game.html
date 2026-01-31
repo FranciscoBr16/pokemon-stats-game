@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokémon Stats Game - Jugando</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png">
+</head>
+<body class="game-page">
+
+  <div class="game-header">
+    <h1>🎮 Pokémon Stats - The Game</h1>
+    <div class="player-info">
+      <span id="player-name-display">Jugador</span>
+      <button id="exit-game-btn" class="exit-btn">🏠 Volver al Inicio</button>
+    </div>
+  </div>
+
+  <div id="game-ui">
+    <div id="pokemon-container">
+      <div class="sprite-wrapper">
+        <img id="pokemon-sprite" src="" alt="Pokemon">
+        <div id="shiny-indicator" class="shiny-badge hidden">✨ SHINY!</div>
+      </div>
+      <p id="pokemon-name">---</p>
+    </div>
+    
+    <div id="action-buttons">
+      <button id="skip-btn" disabled>
+        <span id="skip-text">Skip</span>
+        <span id="skip-count">(0/1)</span>
+      </button>
+      <button id="mega-btn" class="hidden" disabled>
+        ⚡Mega
+        <span id="mega-count">(0/1)</span>
+      </button>
+    </div>
+
+    <div id="form-selector" class="hidden">
+      <p>Selecciona una forma:</p>
+      <div id="form-buttons"></div>
+    </div>
+
+    <div id="stats-buttons">
+      <div class="stat-slot">
+        <button class="stat-btn" data-stat="hp">
+          HP
+          <div class="pokemon-chip"></div>
+        </button>
+        <div class="stat-result hidden"></div>
+      </div>
+
+      <div class="stat-slot">
+        <button class="stat-btn" data-stat="attack">
+          ATQ
+          <div class="pokemon-chip"></div>
+        </button>
+        <div class="stat-result hidden"></div>
+      </div>
+
+      <div class="stat-slot">
+        <button class="stat-btn" data-stat="defense">
+          DEF
+          <div class="pokemon-chip"></div>
+        </button>
+        <div class="stat-result hidden"></div>
+      </div>
+
+      <div class="stat-slot">
+        <button class="stat-btn" data-stat="special-attack">
+          ATQ ESP
+          <div class="pokemon-chip"></div>
+        </button>
+        <div class="stat-result hidden"></div>
+      </div>
+
+      <div class="stat-slot">
+        <button class="stat-btn" data-stat="special-defense">
+          DEF ESP
+          <div class="pokemon-chip"></div>
+        </button>
+        <div class="stat-result hidden"></div>
+      </div>
+
+      <div class="stat-slot">
+        <button class="stat-btn" data-stat="speed">
+          VEL
+          <div class="pokemon-chip"></div>
+        </button>
+        <div class="stat-result hidden"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="result-container" class="hidden">
+    <h2>🎉 ¡Juego Completado!</h2>
+    <ul id="result-stats"></ul>
+    <h3 id="total-score"></h3>
+    <div class="result-actions">
+      <button id="save-score-btn">💾 Guardar Puntaje</button>
+      <button id="restart-btn">🔁 Jugar de Nuevo</button>
+      <button id="home-btn">🏠 Volver al Inicio</button>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

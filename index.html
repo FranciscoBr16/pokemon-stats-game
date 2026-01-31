@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokémon Stats Game</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png">
+
+</head>
+<body class="start-page">
+
+  <div class="start-container">
+    <h1>🎮 Pokémon Stats - The Game</h1>
+    
+    <!-- Animación de intro -->
+    <div class="intro-animation">
+      <img id="intro-sprite" src="" alt="Pokemon intro">
+    </div>
+
+    <!-- Entrada de nombre -->
+    <div class="player-input">
+      <label for="player-name-input">Nombre del jugador:</label>
+      <input 
+        id="player-name-input" 
+        type="text" 
+        maxlength="12" 
+        placeholder="Ash Ketchum"
+      />
+    </div>
+
+    <!-- Rankings -->
+    <div class="rankings-display">
+      <div class="ranking-column">
+        <h3>🏆 Ranking del Día</h3>
+        <ul id="daily-ranking-start"></ul>
+      </div>
+      
+      <div class="ranking-column">
+        <h3>🌍 Ranking Global</h3>
+        <ul id="global-ranking-start"></ul>
+      </div>
+    </div>
+
+    <!-- Opciones avanzadas -->
+    <details class="advanced-options">
+      <summary>⚙️ Opciones Avanzadas</summary>
+      
+      <div class="option-group">
+        <label for="skip-limit">Número de Skips:</label>
+        <input type="number" id="skip-limit" min="0" max="10" value="1">
+      </div>
+
+      <div class="option-group">
+        <label for="legendary-limit">Legendarios permitidos:</label>
+        <select id="legendary-limit">
+          <option value="0">Ninguno</option>
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="-1">Sin límite</option>
+        </select>
+      </div>
+
+      <div class="option-group">
+        <label for="ultrabeast-limit">Ultraentes permitidos:</label>
+        <select id="ultrabeast-limit">
+          <option value="0">Ninguno</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="-1" selected>Sin límite</option>
+        </select>
+      </div>
+
+      <div class="option-group">
+        <label for="mega-limit">Mega-evoluciones permitidas:</label>
+        <select id="mega-limit">
+          <option value="0">Ninguna</option>
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="-1">Sin límite</option>
+        </select>
+      </div>
+
+      <div class="option-group checkbox-group">
+        <label>
+          <input type="checkbox" id="shiny-enabled" checked>
+          Posibilidad de encontrar Shinies (1/2048)
+        </label>
+      </div>
+
+      <div class="option-group checkbox-group" id="shiny-boost-container" style="display: block;">
+        <label>
+          <input type="checkbox" id="shiny-boost">
+          Shinies tienen mejores stats (+5 a +15)
+        </label>
+      </div>
+    </details>
+
+    <!-- Botón de inicio -->
+    <button id="start-game-btn" class="start-btn">🎯 Iniciar Juego</button>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/start.js"></script>
+</body>
+</html>
