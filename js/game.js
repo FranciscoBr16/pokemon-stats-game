@@ -803,12 +803,30 @@ function getTodayKey() {
   return new Date().toISOString().slice(0, 10);
 }
 
-saveScoreBtn.addEventListener('click', () => {
+saveScoreBtn.addEventListener('click', async () => {
   const score = Number(resultContainer.dataset.score);
+  
+  // Guardar en ranking local (diario)
   saveScore(gameConfig.playerName, score);
   
-  alert('¡Puntaje guardado!');
-  saveScoreBtn.disabled = true;
+  // Intentar guardar en Google Sheets (global)
+  if (typeof saveScoreToGlobal === 'function') {
+    saveScoreBtn.disabled = true;
+    saveScoreBtn.textContent = '💾 Guardando...';
+    
+    const result = await saveScoreToGlobal(gameConfig.playerName, score, gameConfig);
+    
+    if (result.success) {
+      alert('🎉 ' + result.message);
+    } else {
+      alert('⚠️ ' + result.message);
+    }
+    
+    saveScoreBtn.textContent = '💾 Guardar Puntaje';
+  } else {
+    alert('¡Puntaje guardado localmente!');
+    saveScoreBtn.disabled = true;
+  }
 });
 
 // ============ NAVEGACIÓN ============

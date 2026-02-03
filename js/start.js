@@ -125,12 +125,39 @@ function renderRanking(listElement, rankingData) {
   });
 }
 
-function showRankings() {
+async function showRankings() {
+  // Ranking diario (local)
   const daily = JSON.parse(localStorage.getItem("pokemonRankingDaily") || "[]");
-  const all = JSON.parse(localStorage.getItem("pokemonRankingAll") || "[]");
-
   renderRanking(dailyRankingStart, getTop10(daily));
-  renderRanking(globalRankingStart, getTop10(all));
+  
+  // Ranking global (Google Sheets)
+  if (typeof getGlobalRanking === 'function') {
+    try {
+      const globalRanking = await getGlobalRanking();
+      
+      if (globalRanking.length > 0) {
+        renderRanking(globalRankingStart, globalRanking);
+        
+        // Actualizar cada 30 segundos
+        startRankingUpdates((updatedRanking) => {
+          renderRanking(globalRankingStart, updatedRanking);
+        }, 30);
+      } else {
+        // Si no hay ranking global, mostrar el local
+        const all = JSON.parse(localStorage.getItem("pokemonRankingAll") || "[]");
+        renderRanking(globalRankingStart, getTop10(all));
+      }
+    } catch (error) {
+      console.error('Error cargando ranking global:', error);
+      // Fallback a ranking local
+      const all = JSON.parse(localStorage.getItem("pokemonRankingAll") || "[]");
+      renderRanking(globalRankingStart, getTop10(all));
+    }
+  } else {
+    // Google Sheets no configurado, usar local
+    const all = JSON.parse(localStorage.getItem("pokemonRankingAll") || "[]");
+    renderRanking(globalRankingStart, getTop10(all));
+  }
 }
 
 // ============ GUARDAR CONFIGURACIÓN ============
