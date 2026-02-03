@@ -84,6 +84,31 @@ async function getGlobalRanking() {
   }
 }
 
+// ============ OBTENER RANKING DIARIO GLOBAL ============
+async function getDailyRankingGlobal() {
+  // La URL ya está configurada, continuar
+
+  try {
+    const response = await fetch(GOOGLE_SCRIPT_URL + '?action=getDailyRanking', {
+      method: 'GET',
+      cache: 'no-cache'
+    });
+
+    const data = await response.json();
+    
+    if (data.success) {
+      console.log('✅ Ranking diario obtenido:', data.data.length, 'entradas');
+      return data.data;
+    } else {
+      console.warn('⚠️ No se pudo obtener el ranking diario');
+      return [];
+    }
+  } catch (error) {
+    console.error('❌ Error obteniendo ranking diario:', error);
+    return [];
+  }
+}
+
 // ============ ACTUALIZACIÓN PERIÓDICA ============
 let rankingUpdateInterval = null;
 

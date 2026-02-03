@@ -126,11 +126,30 @@ function renderRanking(listElement, rankingData) {
 }
 
 async function showRankings() {
-  // Ranking diario (local)
-  const daily = JSON.parse(localStorage.getItem("pokemonRankingDaily") || "[]");
-  renderRanking(dailyRankingStart, getTop10(daily));
+  // Ranking diario (Google Sheets global)
+  if (typeof getDailyRankingGlobal === 'function') {
+    try {
+      const dailyRanking = await getDailyRankingGlobal();
+      
+      if (dailyRanking.length > 0) {
+        renderRanking(dailyRankingStart, dailyRanking);
+      } else {
+        // Fallback a ranking local
+        const daily = JSON.parse(localStorage.getItem("pokemonRankingDaily") || "[]");
+        renderRanking(dailyRankingStart, getTop10(daily));
+      }
+    } catch (error) {
+      console.error('Error cargando ranking diario:', error);
+      const daily = JSON.parse(localStorage.getItem("pokemonRankingDaily") || "[]");
+      renderRanking(dailyRankingStart, getTop10(daily));
+    }
+  } else {
+    // Google Sheets no configurado, usar local
+    const daily = JSON.parse(localStorage.getItem("pokemonRankingDaily") || "[]");
+    renderRanking(dailyRankingStart, getTop10(daily));
+  }
   
-  // Ranking global (Google Sheets)
+  // Ranking global histórico (Google Sheets)
   if (typeof getGlobalRanking === 'function') {
     try {
       const globalRanking = await getGlobalRanking();
@@ -138,10 +157,18 @@ async function showRankings() {
       if (globalRanking.length > 0) {
         renderRanking(globalRankingStart, globalRanking);
         
-        // Actualizar cada 30 segundos
-        startRankingUpdates((updatedRanking) => {
-          renderRanking(globalRankingStart, updatedRanking);
-        }, 30);
+        // Actualizar ambos rankings cada 30 segundos
+        setInterval(async () => {
+          const updatedDaily = await getDailyRankingGlobal();
+          const updatedGlobal = await getGlobalRanking();
+          
+          if (updatedDaily.length > 0) {
+            renderRanking(dailyRankingStart, updatedDaily);
+          }
+          if (updatedGlobal.length > 0) {
+            renderRanking(globalRankingStart, updatedGlobal);
+          }
+        }, 30000);
       } else {
         // Si no hay ranking global, mostrar el local
         const all = JSON.parse(localStorage.getItem("pokemonRankingAll") || "[]");
